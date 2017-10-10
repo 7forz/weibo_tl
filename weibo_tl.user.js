@@ -2,12 +2,12 @@
 // @name         PC微博首页时间线正确排布
 // @description  让微博时间线正确排布
 // @namespace    https://www.kindjeff.com/
-// @version      2017.9.9
+// @version      2017.10.11
 // @author       kindJeff
-// @author       7forz
 // @match        https://weibo.com/*
 // @match        https://www.weibo.com/*
 // @grant        none
+// @run-at       document-start
 // ==/UserScript==
 
 (function() {
