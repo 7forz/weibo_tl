@@ -2,7 +2,7 @@
 // @name         PC微博首页时间线正确排布
 // @description  让微博时间线正确排布
 // @namespace    https://www.kindjeff.com/
-// @version      2017.10.11
+// @version      2019.1.5
 // @author       kindJeff
 // @match        https://weibo.com/*
 // @match        https://www.weibo.com/*
@@ -17,14 +17,14 @@
         var is_home = window.location.pathname.split('/')[2]=='home';
         var is_sorted = window.location.search.indexOf('is_search')!=-1;
 
-        //var right_search = 'is_ori=1&is_forward=1&is_text=1&is_pic=1&is_video=1&is_music=1&is_article=1&is_search=1';
-        var right_search = 'is_ori=1&is_forward=1&is_text=1&is_pic=1&is_video=1&is_music=1&is_article=1&key_word=*&is_search=1';
+        var right_search = 'is_ori=1&is_forward=1&is_text=1&is_pic=1&is_video=1&is_music=1&is_article=1&key_word=&is_search=1';
         var sorted_url = '/home?' + right_search;
 
-
         if(is_home && !is_sorted){
+            console.log('not redirected');
             window.location = sorted_url;
         }else{
+            console.log('redirected');
             document.addEventListener('click', function(e){
                 var is_target_a = e.target.href!==undefined;
 
