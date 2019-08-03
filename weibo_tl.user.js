@@ -2,7 +2,7 @@
 // @name         PC微博首页时间线正确排布
 // @description  让微博时间线正确排布
 // @namespace    https://www.kindjeff.com/
-// @version      2019.1.5
+// @version      2019.07.21
 // @author       kindJeff
 // @match        https://weibo.com/*
 // @match        https://www.weibo.com/*
@@ -17,7 +17,18 @@
         var is_home = window.location.pathname.split('/')[2]=='home';
         var is_sorted = window.location.search.indexOf('is_search')!=-1;
 
-        var right_search = 'is_ori=1&is_forward=1&is_text=1&is_pic=1&is_video=1&is_music=1&is_article=1&key_word=&is_search=1';
+        // end_time = today's date
+        var date = new Date();
+        var nowMonth = date.getMonth() + 1;
+        var strDate = date.getDate();
+        var seperator = "-";
+        if (nowMonth >= 1 && nowMonth <= 9)
+           nowMonth = "0" + nowMonth;
+        if (strDate >= 0 && strDate <= 9)
+           strDate = "0" + strDate;
+        var nowDate = date.getFullYear() + "-" + nowMonth + "-" + strDate;
+        
+        var right_search = 'is_ori=1&is_forward=1&is_text=1&is_pic=1&is_video=1&is_music=1&is_article=1&key_word=*&is_search=1&end_time=' + nowDate;
         var sorted_url = '/home?' + right_search;
 
         if(is_home && !is_sorted){
@@ -29,8 +40,9 @@
                 var is_target_a = e.target.href!==undefined;
 
                 var the_target = e.target;
-                if(!is_target_a)
+                if(!is_target_a) {
                     the_target = e.target.parentNode;
+                }
 
                 if(the_target.href!==undefined){
                     if(the_target.href.slice(-12)==='is_search=1#'){
@@ -47,8 +59,9 @@
                             e.preventDefault();
                             var new_href = the_target.href.replace(/pids=Pl_Content_HomeFeed/, '');
                             window.location = new_href;
-                        }else
+                        } else {
                             window.location = sorted_url;
+                        }
                     }
                 }
             },true);
